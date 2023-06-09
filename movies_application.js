@@ -53,4 +53,47 @@ $(document).ready(function() {
     };
     movieDisplay();
 
+    // Show/hide the edit menu
+    $(document).on("click", "#edit-movie, #add-movie-submit", function() {
+        $(".edit-movie").toggleClass("hidden");
+        $(".select-movie").toggleClass("hidden");
+    });
+
+// Show/hide the delete menu
+    $(document).on("click", "#delete, #delete-movie", function() {
+        $(".dropdown-menu.delete-movie").toggleClass("hidden");
+        $("#delete-movie").toggleClass("hidden");
+    });
+
+// Show/hide the post menu
+    $(document).on("click", "#add-movie, #add-movie-submit", function() {
+        $(".dropdown-menu.addMovie").toggleClass("hidden");
+    });
+
+
+    // Add movie
+    $("#add-movie").click((event)=>{
+        event.preventDefault();
+        let addMovie={
+            title: $("#movie-title").val(),
+            genre: $("#select-genre").val(),
+            rating: $("#select-rating").val(),
+            image: '<img class="image" src="img/no-picture-avaliable.GIF">'
+        }
+        const postOptions ={
+            method:'POST',
+            headers:{
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(addMovie),
+        }
+        fetch(url, postOptions).then(response => response.json()).then(movieDisplay).catch(error=>console.log(error));
+    });
+
+
+
+
+
+
+
 });
