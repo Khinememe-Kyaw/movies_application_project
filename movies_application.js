@@ -49,11 +49,12 @@ $(document).ready(function() {
             });
             console.log(movies);
             $(".display-movies").html(htmlMovies);
+            $("#selectMovie").html("<option value='-1' selected>Select a movie</option>" + html);
         });
     };
     movieDisplay();
 
-    // Show/hide the edit menu
+// Show/hide the edit menu
     $(document).on("click", "#edit-movie, #add-movie-submit", function() {
         $(".edit-movie").toggleClass("hidden");
         $(".select-movie").toggleClass("hidden");
@@ -68,6 +69,21 @@ $(document).ready(function() {
 // Show/hide the post menu
     $(document).on("click", "#add-movie, #add-movie-submit", function() {
         $(".dropdown-menu.addMovie").toggleClass("hidden");
+    });
+
+// Update input fields on option change
+    $(document).on("change", "#selectMovie", function() {
+        let request = $(this).val();
+        console.log(request);
+
+        // Grab info from the JSON file and populate the input fields
+        moviesAll.forEach(function (movie) {
+            if (movie.id == request) {
+                $("#edit-title").attr("value", movie.title);
+                $("#edit-genre").attr("value", movie.genre);
+                $("#edit-rating").attr("value", movie.rating);
+            }
+        })
     });
 
 
@@ -90,6 +106,24 @@ $(document).ready(function() {
         fetch(url, postOptions).then(response => response.json()).then(movieDisplay).catch(error=>console.log(error));
     });
 
+    // Edit Movie
+    $("#edit-movie").click(()=>{
+        let input = $("#selectMovie").val()
+        let editMovie={
+            title: $("#edit-title").val(),
+            genre: $("#select-edit-genre").val(),
+            rating: $("#select-edit-rating").val(),
+            image: '<img class="image" src="img/no-picture-avaliable.GIF">'
+        }
+        const patchOptions ={
+            method:'PATCH',
+            headers:{
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(editMovie),
+        }
+        fetch(`${url}/${input}`, patchOptions).then(response => response.json()).then(movieDisplay).catch(error=>console.log(error));
+    });
 
 
 
