@@ -40,3 +40,41 @@ i{
     margin: 20px;
     font-size:20px;
 }
+
+.button{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    /*margin-top: 3em;*/
+}
+button{
+    background-color: #141414;
+    color: #c1c1c1;
+    width: 10em;
+    height: 3em;
+    margin: 3em 5em;
+}
+.title{
+    color: #141414;
+    font-size: 25px;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+}
+.loading{
+    width:70%;
+    height:auto;
+}
+.display-movies{
+    display: flex;
+    justify-content: space-around;
+    margin:3em 0.5em 1em 3em;
+}
+.image{
+    width:15em;
+    height:20em;
+}
+.dropdown-menu-columns-3 {
+    columns: 3;
+    column-gap: 2rem;
+}
