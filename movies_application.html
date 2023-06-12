@@ -22,40 +22,49 @@
             <a href="#">Browse by Languages</a>
         </nav>
         <nav class="nav-right">
-            <i class="fa fa-search" aria-hidden="true"></i>
+            <i class="fa fa-search nav-icon" aria-hidden="true"></i>
             <a href="#">Kids</a>
-            <i class="fa fa-bell-o" aria-hidden="true"></i>
-            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+            <i class="fa fa-bell-o nav-icon" aria-hidden="true"></i>
+            <i class="fa fa-user-circle-o side-icon" aria-hidden="true"></i>
         </nav>
     </div>
     <div class="sidebar">
+        <i class="fa fa-hourglass-start side-icon" aria-hidden="true"></i>
+        <i class="fa fa-bookmark side-icon" aria-hidden="true"></i>
+        <i class="fa fa-volume-up side-icon" aria-hidden="true"></i>
+        <i class="fa fa-toggle-on side-icon" aria-hidden="true"></i>
+        <i class="fa fa-toggle-off side-icon" aria-hidden="true"></i>
+        <i class="fa fa-television side-icon" aria-hidden="true"></i>
+        <i class="fa fa-share-alt-square side-icon" aria-hidden="true"></i>
+        <i class="fa fa-users side-icon" aria-hidden="true"></i>
 
     </div>
-    </div>
-    <!--Displaying Movies-->
-    <div class="display-movies"></div>
+
+<!--    Movies add, edit and delete-->
+<div class="container">
 
     <div class="button">
         <!--Add new movies-->
-        <div class="add-movie">
+        <div class="add">
             <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 Add Movie
             </button>
 
             <ul class="dropdown-menu addMovie">
+
                 <!--        Adding title-->
-                <li><form id="input">
-                    <div class="user-add-movie">
-                        <label for="movie-title">MOVIE NAME TO ADD</label><br />
-                        <input type="text" id="movie-title"><br><br>
+                <li><form >
+                    <div class="add-name">
+                        <label for="add-name">MOVIE NAME TO ADD</label><br />
+                        <input type="text" id="add-name"><br><br>
                     </div>
                 </form></li>
 
 
                 <!--    Adding Genre-->
                 <li>
-                    <label for="select-genre"> SELECT GENRE</label><br>
-                    <select id="select-genre">
+                    <label for="add-genre"> SELECT GENRE</label><br>
+                    <select id="add-genre">
                         <option value="action">Action</option>
                         <option value="anime">Anime</option>
                         <option value="classic">Classic</option>
@@ -73,8 +82,8 @@
                 </li>
                 <!-- Adding Rating-->
                 <li>
-                    <label for="select-rating"> Give the Movie Rating</label><br>
-                    <select id="select-rating">
+                    <label for="add-rating"> Give the Movie Rating</label><br>
+                    <select id="add-rating">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -82,35 +91,35 @@
                         <option value="5">5</option>
                     </select><br><br>
                 </li>
-                <input id="add-movie" type="Submit">
+                <input id="add-movie-submit" type="Submit">
 
             </ul>
         </div>
 
         <!--Edit existing movies-->
-        <div class="edit-movie">
+        <div class="edit">
             <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 Edit Movie
             </button>
 
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu editMovie">
                 <!--        Selecting existing movie-->
                 <li>
-                    <Select  id="selectMovie" class="hidden select-movie">
+                    <Select  id="edit-movie" class=" select-movie">
                         Select the Existing Movie
                     </Select>
                 </li>
                 <!--        Editing title-->
                 <li><form>
-                    <div class="user-edit-movie">
-                        <label for="movie-title">MOVIE NAME TO ADD</label><br />
-                        <input type="text" id="edit-title"><br><br>
+                    <div class="edit-name">
+                        <label for="edit-name">MOVIE NAME TO ADD</label><br />
+                        <input type="text" id="edit-name"><br><br>
                     </div>
                 </form></li>
                 <!--    Edit Genre-->
                 <li>
-                    <label for="select-edit-genre"> CHANGE GENRE</label><br>
-                    <select id="select-edit-genre">
+                    <label for="edit-genre"> CHANGE GENRE</label><br>
+                    <select id="edit-genre">
                         <option value="action">Action</option>
                         <option value="anime">Anime</option>
                         <option value="classic">Classic</option>
@@ -128,8 +137,8 @@
                 </li>
                 <!-- Changing Rating-->
                 <li>
-                    <label for="select-edit-rating"> Change the Movie Rating</label><br>
-                    <select id="select-edit-rating">
+                    <label for="edit-rating"> Change the Movie Rating</label><br>
+                    <select id="edit-rating">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -138,13 +147,31 @@
                     </select><br><br>
                 </li>
                 <li>
-                    <input id="edit-movie" type="Submit">
+                    <input id="edit-movie-submit" type="Submit">
                 </li>
 
             </ul>
         </div>
+        <!--Delete movies-->
+        <div class="delete">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Delete Movie
+            </button>
 
+            <ul class="dropdown-menu deleteMovie">
+                <li><select id="delete-movie">
+                    <option>Delete a movie</option>
+                </select><br><br></li>
+                <li><button id="delete-movie-submit" >Delete movie</button></li>
+            </ul>
+        </div>
     </div>
+        <!--Displaying Movies-->
+        <div>
+        <div id="display-movies" ></div>
+            </div>
+</div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="accessKey.js"></script>
