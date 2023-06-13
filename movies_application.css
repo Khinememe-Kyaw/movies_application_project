@@ -27,7 +27,6 @@ h1{
     justify-content: flex-start;
 }
 .nav-right{
-    /*margin: 30px 15px;*/
     margin-top: 20px;
 }
 .nav-icon{
@@ -96,7 +95,6 @@ button{
     font-style: italic;
     margin-top: 2em;
     text-align: center;
-    /*width: 10em;*/
 }
 .genre{
     color: #141414;
@@ -104,7 +102,6 @@ button{
     text-align: center;
     font-weight: bold;
     margin-bottom: 1em;
-
 }
 
 .loading{
@@ -142,13 +139,16 @@ button{
     margin: 3em 2em;
 }
 
+.card.active {
+    background: linear-gradient(60deg, #6c8988, #8b5e5e, #6b739c, #7d5e85, #738d70);
+}
+
 .button-clicked {
     background-color: red;
     color: white;
 }
 .rating{
     text-align: center;
-    /*margin-bottom: 1em;*/
     background-color: #141414;
 }
 .toggle {
@@ -161,7 +161,6 @@ button{
     justify-content: space-around;
     position: relative;
     margin:20px 15px;
-    /*padding-top: 10px;*/
 }
 
 .toggle-icon {

@@ -60,17 +60,12 @@ $(document).ready(function() {
                 let htmlMovies = "";
                 let html = "";
                 moviesAll.forEach(function (movie) {
-
                     html += `<option value=${movie.id}>${movie.title}</option>`;
-
                     htmlMovies += `<div class = "card"><h2 class="title">${movie.title}</h2>`
                     htmlMovies += `<div class="genre">${movie.genre}</div>`
-                    // htmlMovies += `<div class="rating">${movie.rating}</div> `;
                     htmlMovies += `<div class="rating">${stars(movie)}</div> `;
                     htmlMovies += `<div class="image">${movie.image}</div>`
                     htmlMovies += `</div></div>`
-
-
                 });
                 console.log(moviesAll);
                 $("#display-movies").html(htmlMovies);
@@ -148,7 +143,6 @@ $(document).ready(function() {
             genre: $("#add-genre").val(),
             rating: $("#add-rating").val(),
             image: '<img class="image" src="img/add.default.GIF">'
-            // image: $("#add-image").val()
         }
         const postOptions ={
             method:'POST',
@@ -233,9 +227,7 @@ $(document).ready(function() {
     //TOGGLE
 
     const ball = document.querySelector(".toggle-ball");
-    const items = document.querySelectorAll(
-        ".card,.sidebar,.navbar, body"
-    );
+    const items = document.querySelectorAll("div .card, .toggle, body"); // Adjusted the selector
 
     ball.addEventListener("click", () => {
         items.forEach((item) => {
@@ -243,7 +235,6 @@ $(document).ready(function() {
         });
         ball.classList.toggle("active");
     });
-
 
 
 });
