@@ -10,7 +10,7 @@
 </head>
 <body>
     <!--//Nav Bar-->
-    <div class="navbar">
+        <div class="navbar">
         <nav class="nav-left">
             <h1>SAPPORO</h1>
             <a href="#">Home</a>
@@ -23,23 +23,25 @@
         </nav>
         <nav class="nav-right">
             <i class="fa fa-search nav-icon" aria-hidden="true"></i>
-            <a href="#">Kids</a>
+            <p class="profile">Profile</p>
+            <i class="fa fa-sort-desc" aria-hidden="true"></i>
             <i class="fa fa-bell-o nav-icon" aria-hidden="true"></i>
-            <i class="fa fa-user-circle-o side-icon" aria-hidden="true"></i>
+            <div class="toggle">
+                <i class="fas fa-moon toggle-icon" aria-hidden="true"></i>
+                <i class="fas fa-sun toggle-icon" aria-hidden="true"></i>
+                <div class="toggle-ball"></div>
+            </div>
         </nav>
     </div>
     <div class="sidebar">
         <i class="fa fa-hourglass-start side-icon" aria-hidden="true"></i>
         <i class="fa fa-bookmark side-icon" aria-hidden="true"></i>
         <i class="fa fa-volume-up side-icon" aria-hidden="true"></i>
-        <i class="fa fa-toggle-on side-icon" aria-hidden="true"></i>
-        <i class="fa fa-toggle-off side-icon" aria-hidden="true"></i>
         <i class="fa fa-television side-icon" aria-hidden="true"></i>
         <i class="fa fa-share-alt-square side-icon" aria-hidden="true"></i>
         <i class="fa fa-users side-icon" aria-hidden="true"></i>
 
     </div>
-
 <!--    Movies add, edit and delete-->
 <div class="container">
 
@@ -65,19 +67,19 @@
                 <li>
                     <label for="add-genre"> SELECT GENRE</label><br>
                     <select id="add-genre">
-                        <option value="action">Action</option>
-                        <option value="anime">Anime</option>
-                        <option value="classic">Classic</option>
-                        <option value="comedy">Comedy</option>
-                        <option value="crime">Crime</option>
-                        <option value="documentaries">Documentaries</option>
-                        <option value="drama">Drama</option>
-                        <option value="horror">Horror</option>
-                        <option value="mystery">Mystery</option>
-                        <option value="romance">Romance</option>
-                        <option value="sci-Fiction">Sci-Fiction</option>
-                        <option value="sports">Sports</option>
-                        <option value="stand-Up">Stand-Up</option>
+                        <option value="Action">Action</option>
+                        <option value="Anime">Anime</option>
+                        <option value="Classic">Classic</option>
+                        <option value="Comedy">Comedy</option>
+                        <option value="Crime">Crime</option>
+                        <option value="Documentaries">Documentaries</option>
+                        <option value="Drama">Drama</option>
+                        <option value="Horror">Horror</option>
+                        <option value="Mystery">Mystery</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Sci-Fiction">Sci-Fiction</option>
+                        <option value="Sports">Sports</option>
+                        <option value="Stand-Up">Stand-Up</option>
                     </select><br><br>
                 </li>
                 <!-- Adding Rating-->
@@ -91,7 +93,7 @@
                         <option value="5">5</option>
                     </select><br><br>
                 </li>
-                <input id="add-movie-submit" type="Submit">
+                <button id="add-movie-submit" class="submit" type="Submit">ADD</button>
 
             </ul>
         </div>
@@ -120,19 +122,19 @@
                 <li>
                     <label for="edit-genre"> CHANGE GENRE</label><br>
                     <select id="edit-genre">
-                        <option value="action">Action</option>
-                        <option value="anime">Anime</option>
-                        <option value="classic">Classic</option>
-                        <option value="comedy">Comedy</option>
-                        <option value="crime">Crime</option>
-                        <option value="documentaries">Documentaries</option>
-                        <option value="drama">Drama</option>
-                        <option value="horror">Horror</option>
-                        <option value="mystery">Mystery</option>
-                        <option value="romance">Romance</option>
-                        <option value="sci-Fiction">Sci-Fiction</option>
-                        <option value="sports">Sports</option>
-                        <option value="stand-Up">Stand-Up</option>
+                        <option value="Action">Action</option>
+                        <option value="Anime">Anime</option>
+                        <option value="Classic">Classic</option>
+                        <option value="Comedy">Comedy</option>
+                        <option value="Crime">Crime</option>
+                        <option value="Documentaries">Documentaries</option>
+                        <option value="Drama">Drama</option>
+                        <option value="Horror">Horror</option>
+                        <option value="Mystery">Mystery</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Sci-Fiction">Sci-Fiction</option>
+                        <option value="Sports">Sports</option>
+                        <option value="Stand-Up">Stand-Up</option>
                     </select><br><br>
                 </li>
                 <!-- Changing Rating-->
@@ -147,7 +149,7 @@
                     </select><br><br>
                 </li>
                 <li>
-                    <input id="edit-movie-submit" type="Submit">
+                    <button id="edit-movie-submit" class="submit" type="Submit">EDIT</button>
                 </li>
 
             </ul>
@@ -162,15 +164,46 @@
                 <li><select id="delete-movie">
                     <option>Delete a movie</option>
                 </select><br><br></li>
-                <li><button id="delete-movie-submit" >Delete movie</button></li>
+                <li><button id="delete-movie-submit" class="submit" >Delete movie</button></li>
+            </ul>
+        </div>
+        <!--    Sorting-->
+        <div class="sorting">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                SORT Movie
+            </button>
+
+            <ul class="dropdown-menu sortMovie">
+                <li>
+
+                    <select id="sort-by">
+                        <option value="rating">Rating</option>
+                        <option value="title">Title</option>
+                        <option value="genre">Genre</option>
+                    </select>
+
+                </li>
             </ul>
         </div>
     </div>
+<!--    Filtering-->
+    <div class="search-bar">
+        <input type="text" id="search-value" placeholder="Search By Name, Genre or Rating">
+        <select id="search-criteria">
+            <option value="rating">Rating</option>
+            <option value="title">Title</option>
+            <option value="genre">Genre</option>
+        </select>
+        <button id="search-submit" type="button">Search</button>
+    </div>
+
         <!--Displaying Movies-->
         <div>
         <div id="display-movies" ></div>
             </div>
 </div>
+
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>

@@ -1,6 +1,8 @@
 "use strict";
+let moviesAll=[];
 $(document).ready(function() {
-    fetch(url).then(response => response.json()).then(movies => console.log(movies));
+
+    fetch(url).then(response => response.json()).then(movies => moviesAll=movies);
 
     fetch(`${url}/1`, {
         method: 'PATCH',
@@ -33,47 +35,119 @@ $(document).ready(function() {
         },
         body: JSON.stringify({title: "Something Borrowed", rating: "2", genre: "Romance", image:'<img class="image" src="img/something-borrowed.jpeg">'})
     }).then(resp => resp.json()).then(movies => console.log(movies));
-    //Displaying movies from JSON in HTML
-    let moviesAll=[];
+    // Displaying movies from JSON in HTML
+
     let movieDisplay = () => {
         let loading = `<div><img class="loading" src="../img/loading.gif"></div>`;
         $("#display-movies").html(loading);
         setTimeout(() => {
-            fetch(url).then(resp => resp.json()).then(movies => { moviesAll = movies
+            fetch(url).then(resp => resp.json()).then(movies => {
+                moviesAll = movies
+                // Get the selected sort option
+                const sortBy = $("#sort-by").val();
+
+                // Sort the movies based on the selected option
+                moviesAll.sort((a, b) => {
+                    if (sortBy === "rating") {
+                        return b.rating - a.rating;
+                    } else if (sortBy === "title") {
+                        return a.title.localeCompare(b.title);
+                    } else if (sortBy === "genre") {
+                        return a.genre.localeCompare(b.genre);
+                    }
+                });
+
                 let htmlMovies = "";
                 let html = "";
                 moviesAll.forEach(function (movie) {
+
                     html += `<option value=${movie.id}>${movie.title}</option>`;
 
                     htmlMovies += `<div class = "card"><h2 class="title">${movie.title}</h2>`
                     htmlMovies += `<div class="genre">${movie.genre}</div>`
-                    htmlMovies += `<div class="rating">${createRatings(movie)}</div> `;
-                    htmlMovies +=`<div class="image">${movie.image}</div>`
+                    // htmlMovies += `<div class="rating">${movie.rating}</div> `;
+                    htmlMovies += `<div class="rating">${stars(movie)}</div> `;
+                    htmlMovies += `<div class="image">${movie.image}</div>`
                     htmlMovies += `</div></div>`
 
-                });
 
-                console.log(movies);
+                });
+                console.log(moviesAll);
                 $("#display-movies").html(htmlMovies);
                 $("#edit-movie").html("<option value='-1' selected>Select a movie</option>" + html);
                 $("#delete-movie").html("<option value='-1' selected>Select a movie</option>" + html);
-            });
+            })
+        .catch(error => console.log(error));
         }, 2000);
 
     };
+    $("#sort-by").change(movieDisplay);
+    // Function to filter movies based on user search criteria
+    const filterMovies = (searchCriteria, searchValue) => {
+        return moviesAll.filter((movie) => {
+            if (searchCriteria === "rating") {
+                return movie.rating.toString() === searchValue;
+            } else if (searchCriteria === "title") {
+                return movie.title.toLowerCase().includes(searchValue.toLowerCase());
+            } else if (searchCriteria === "genre") {
+                return movie.genre.toLowerCase().includes(searchValue.toLowerCase());
+            }
+        });
+    };
+
+// Function to display filtered movies
+    const displayFilteredMovies = (filteredMovies) => {
+        let htmlMovies = "";
+        filteredMovies.forEach((movie) => {
+            htmlMovies += `<div class="card">
+      <h2 class="title">${movie.title}</h2>
+      <div class="genre">${movie.genre}</div>
+      <div class="rating">${stars(movie)}</div>
+      <div class="image">${movie.image}</div>
+    </div>`;
+        });
+        $("#display-movies").html(htmlMovies);
+    };
+
+// Search functionality
+    $("#search-submit").click((event) => {
+        event.preventDefault();
+        const searchCriteria = $("#search-criteria").val();
+        const searchValue = $("#search-value").val().trim().toLowerCase();
+
+        if (searchCriteria && searchValue) {
+            const filteredMovies = filterMovies(searchCriteria, searchValue);
+            displayFilteredMovies(filteredMovies);
+        }
+    });
+
+    let stars = (movie) => {
+        let html = "";
+        if (movie && movie.rating !== undefined) {
+            for (let i = 0; i < movie.rating; i++) {
+                html += "<i class=\"fas fa-star\" style='color: red'></i>";
+            }
+            if (movie.rating !== 5) {
+                for (let j = movie.rating; j < 5; j++) {
+                    html += "<i class=\"fas fa-star\"></i>";
+                }
+            }
+        }
+        return html;
+    };
+
     movieDisplay();
-
-
-// Update input fields on option change
 
     // Add movie
     $("#add-movie-submit").click((event)=>{
         event.preventDefault();
+        //disabled attribute to buttons while their corresponding ajax request is still pending
+        $("#add-movie-submit").prop("disabled", true);
         let addMovie={
             title: $("#add-name").val(),
             genre: $("#add-genre").val(),
             rating: $("#add-rating").val(),
-            image: '<img class="image" src="img/no-picture-avaliable.GIF">'
+            image: '<img class="image" src="img/add.default.GIF">'
             // image: $("#add-image").val()
         }
         const postOptions ={
@@ -83,28 +157,32 @@ $(document).ready(function() {
             },
             body: JSON.stringify(addMovie),
         }
-        fetch(url, postOptions).then(response => response.json()).then(movieDisplay).catch(error=>console.log(error));
+        fetch(url, postOptions).then(response => response.json()).then(movieDisplay)
+            .then(()=> {
+                $("#add-movie-submit").prop("disabled", false); // enabled the button
+        });
     });
-
+    // Edit Movies
     $(document).on("change", "#edit-movie", function() {
         let request = $(this).val();
         console.log(request);
 
-        // Grab info from the JSON file and populate the input fields
-        moviesAll.forEach(function (movie) {
+         moviesAll.forEach(function(movie){
+
             if (movie.id == request) {
                 $("#edit-title").attr("value", movie.title);
                 $("#edit-genre").attr("value", movie.genre);
-                $("#edit-rating").attr("value", movie.rating);
-                console.log("movie:" + movie); // Move the console.log inside the loop
+                $("#edit-rating").attr("value", stars(movie));
             }
-        });
+        })
     });
 
-    $("#edit-movie-submit").click(() => {
-        let input = $("#edit-movie").val(); // Corrected selector
+    $("#edit-movie-submit").click(()=>{
+        //disabled attribute to buttons while their corresponding ajax request is still pending
+        $("#edit-movie-submit").prop("disabled", true);
+        let input = $("#edit-movie").val();
         let editMovie = {
-            title: $("#edit-title").val(),
+            title: $("#edit-name").val(),
             genre: $("#edit-genre").val(),
             rating: $("#edit-rating").val(),
             image: '<img class="image" src="img/edit-default.jpg">'
@@ -117,10 +195,13 @@ $(document).ready(function() {
             },
             body: JSON.stringify(editMovie),
         };
-
+        console.log(editMovie);
         fetch(`${url}/${input}`, patchOptions)
             .then(response => response.json())
             .then(movieDisplay)
+            .then(()=>{
+                $("#edit-movie-submit").prop("disabled", false);  //enable the button
+            })
             .catch(error => console.log(error));
     });
 
@@ -137,54 +218,33 @@ $(document).ready(function() {
         let userInput = $(this).val();
         console.log(userInput);
         $("#delete-movie-submit").click(function() {
+            $("#delete-movie-submit").prop("disabled", true);
             //DELETE request
             fetch(`${url}/${userInput}`, deleteOptions)
-                .then(movieDisplay);
+                .then(movieDisplay)
+                .then(()=>{
+                    $("#delete-movie-submit").prop("disabled", false);
+            })
         });
     });
+    document.getElementById("edit-movie-submit").addEventListener("click", function() {
+        this.classList.add("button-clicked");
+    });
+    //TOGGLE
+
+    const ball = document.querySelector(".toggle-ball");
+    const items = document.querySelectorAll(
+        ".card,.sidebar,.navbar, body"
+    );
+
+    ball.addEventListener("click", () => {
+        items.forEach((item) => {
+            item.classList.toggle("active");
+        });
+        ball.classList.toggle("active");
+    });
+
+
+
 });
-
-function createRatings(movie){
-    let html = "";
-    for(let i = 0; i < movie.rating; i++){
-        html += "<i class=\"fas fa-star\" style='color: yellow'></i>"
-    }
-    if(movie.rating !== 5){
-        for(let j = movie.rating; j < 5; j++){
-            html += "<i class=\"fas fa-star\"></i>";
-        }
-    }
-    return html;
-}
-createRatings();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
