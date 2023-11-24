@@ -1,192 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/6bffcc9069.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="movies_application.css">
     <title>Movies Application</title>
 </head>
+
 <body>
     <!--//Nav Bar-->
-        <nav class="navbar">
-            <h1>LOGO</h1>
-            <a href="#">Home</a>
-            <a href="#">TV Shows</a>
-            <a href="#">Movies</a>
-            <a href="#">New & Popular</a>
-            <a href="#">My List</a>
-            <a href="#">Genre</a>
-            <a href="#">Browse by Languages</a>
-        </nav>
-
-<!--    Movies add, edit and delete-->
-<div class="container">
-
-    <div class="button">
-        <!--Add new movies-->
-        <div class="add">
-            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                Add Movie
-            </button>
-
-            <ul class="dropdown-menu addMovie">
-
-                <!--        Adding title-->
-                <li><form >
-                    <div class="add-name">
-                        <label for="add-name">MOVIE NAME TO ADD</label><br />
-                        <input type="text" id="add-name"><br><br>
-                    </div>
-                </form></li>
-
-
-                <!--    Adding Genre-->
-                <li>
-                    <label for="add-genre"> SELECT GENRE</label><br>
-                    <select id="add-genre">
-                        <option value="Action">Action</option>
-                        <option value="Anime">Anime</option>
-                        <option value="Classic">Classic</option>
-                        <option value="Comedy">Comedy</option>
-                        <option value="Crime">Crime</option>
-                        <option value="Documentaries">Documentaries</option>
-                        <option value="Drama">Drama</option>
-                        <option value="Horror">Horror</option>
-                        <option value="Mystery">Mystery</option>
-                        <option value="Romance">Romance</option>
-                        <option value="Sci-Fiction">Sci-Fiction</option>
-                        <option value="Sports">Sports</option>
-                        <option value="Stand-Up">Stand-Up</option>
-                    </select><br><br>
-                </li>
-                <!-- Adding Rating-->
-                <li>
-                    <label for="add-rating"> Give the Movie Rating</label><br>
-                    <select id="add-rating">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select><br><br>
-                </li>
-                <button id="add-movie-submit" class="submit" type="Submit">ADD</button>
-
-            </ul>
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <img src="./img/placeholder.jpeg" width="140" height="32" alt="Movie App">
+        </a>
+        <ul class="nav-lists">
+            <li>
+                <a href="#" class="nav-link">HOME</a>
+            </li>
+            <li>
+                <a href="#" class="nav-link">MOVIE</a>
+            </li>
+            <li>
+                <a href="#" class="nav-link">TV SHOW</a>
+            </li>
+            <li>
+                <a href="#" class="nav-link">New & Popular</a>
+            </li>
+            <li>
+                <a href="#" class="nav-link">GENRE</a>
+            </li>
+        </ul>
+        <div class="search">
+            <input type="text" id="search" placeholder="Type keyword to search">
+            <img src="./img/search.png" width="24" height="24" alt="search" class="icon">
         </div>
-
-        <!--Edit existing movies-->
-        <div class="edit">
-            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                Edit Movie
-            </button>
-
-            <ul class="dropdown-menu editMovie">
-                <!--        Selecting existing movie-->
-                <li>
-                    <Select  id="edit-movie" class=" select-movie">
-                        Select the Existing Movie
-                    </Select>
-                </li>
-                <!--        Editing title-->
-                <li><form>
-                    <div class="edit-name">
-                        <label for="edit-name">MOVIE NAME TO ADD</label><br />
-                        <input type="text" id="edit-name"><br><br>
-                    </div>
-                </form></li>
-                <!--    Edit Genre-->
-                <li>
-                    <label for="edit-genre"> CHANGE GENRE</label><br>
-                    <select id="edit-genre">
-                        <option value="Action">Action</option>
-                        <option value="Anime">Anime</option>
-                        <option value="Classic">Classic</option>
-                        <option value="Comedy">Comedy</option>
-                        <option value="Crime">Crime</option>
-                        <option value="Documentaries">Documentaries</option>
-                        <option value="Drama">Drama</option>
-                        <option value="Horror">Horror</option>
-                        <option value="Mystery">Mystery</option>
-                        <option value="Romance">Romance</option>
-                        <option value="Sci-Fiction">Sci-Fiction</option>
-                        <option value="Sports">Sports</option>
-                        <option value="Stand-Up">Stand-Up</option>
-                    </select><br><br>
-                </li>
-                <!-- Changing Rating-->
-                <li>
-                    <label for="edit-rating"> Change the Movie Rating</label><br>
-                    <select id="edit-rating">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select><br><br>
-                </li>
-                <li>
-                    <button id="edit-movie-submit" class="submit" type="Submit">EDIT</button>
-                </li>
-
-            </ul>
-        </div>
-        <!--Delete movies-->
-        <div class="delete">
-            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                Delete Movie
-            </button>
-
-            <ul class="dropdown-menu deleteMovie">
-                <li><select id="delete-movie">
-                    <option>Delete a movie</option>
-                </select><br><br></li>
-                <li><button id="delete-movie-submit" class="submit" >Delete movie</button></li>
-            </ul>
-        </div>
-        <!--    Sorting-->
-        <div class="sorting">
-            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                SORT Movie
-            </button>
-
-            <ul class="dropdown-menu sortMovie">
-                <li>
-
-                    <select id="sort-by">
-                        <option value="rating">Rating</option>
-                        <option value="title">Title</option>
-                        <option value="genre">Genre</option>
-                    </select>
-
-                </li>
-            </ul>
-        </div>
-    </div>
-<!--    Filtering-->
-    <div class="search-bar">
-        <input type="text" id="search-value" placeholder="Search By Name, Genre or Rating">
-        <select id="search-criteria">
-            <option value="rating">Rating</option>
-            <option value="title">Title</option>
-            <option value="genre">Genre</option>
-        </select>
-        <button id="search-submit" type="button">Search</button>
-    </div>
-
-        <!--Displaying Movies-->
-        <div>
-        <div id="display-movies" ></div>
-            </div>
-</div>
+    </nav>
+    <!--    movies-->
+    <main>
+        <article class="container"></article>
+    </main>
 
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="accessKey.js"></script>
     <script src="movies_application.js"></script>
 </body>
+
 </html>
