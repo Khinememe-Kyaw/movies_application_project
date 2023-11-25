@@ -1,212 +1,50 @@
 @import url('https://kit.fontawesome.com/6bffcc9069.js');
-* {
-    font-family: 'Ubuntu', sans-serif;
+*,
+*::before,
+*::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-
+html{
+    font-family: sans-serif;
+    color:white;
+    font-size: 20px;
+    scroll-behavior: smooth;
+}
 body{
-    background-color: grey;
+    background-color: black;
+    line-height: 1.5;
+    color:white;
 }
-body.active{
-    background-color: aqua;
+/* heading */
+li{
+    list-style-type: none;
 }
-.navbar {
-    color: #c1c1c1;
-    background-color: #141414;
-    display:flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-h1{
-    color: red;
-    font-weight: bolder;
-}
-
-.nav-left{
-    display:flex;
-    flex-direction: row;
-    justify-content: flex-start;
-}
-.nav-right{
-    margin-top: 20px;
-}
-.nav-icon{
-    margin: 20px;
-    font-size:20px;
-    color: white;
-}
-.profile{
-    color: white;
-    font-size: 20px;
-    font-weight: bolder;
-    margin-top: 15px;
-    margin-right: 0;
-}
-
-.sidebar{
-    width: 70px;
-    height: 100%;
-    background-color: #141414;
-    padding-top: 5em;
-    position: fixed;
-    top:0;
-    z-index: -1;
-}
-
-.side-icon{
-    color: white;
-    margin: 27px;
-    font-size: 25px;
-}
-
-a{
-    margin: 20px 15px;
-}
-
-.nav-right{
-    display:flex;
-    flex-direction: row;
-    justify-content: center;
-    align-content: space-around;
-}
-
-i {
-    margin: 20px 15px;
-    font-size: 20px;
-    text-align:center;
-    color: white;
-}
-
-.button{
-    display:flex;
-    flex-direction: row;
-    justify-content: center;
-}
-button{
-    background-color: white;
-    color: black;
-    width: 13em;
-    height: 3em;
-    margin: 3em 2em 0 2em;
-}
-.title{
-    color: #141414;
-    font-size: 30px;
-    font-weight: bold;
-    font-style: italic;
-    margin-top: 2em;
-    text-align: center;
-}
-.genre{
-    color: #141414;
-    font-size: 20px;
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 1em;
-}
-
-.loading{
-    width:100%;
-    height:auto;
-   display: flex;
-    opacity: 0.7;
-    margin:2em;
-}
-#display-movies{
-    display: flex;
-    flex-flow: wrap row;
-    justify-content: space-around;
-    align-content: space-evenly;
-
-}
-
-.image{
-    width:20em;
-    height:22em;
-}
-
-.dropdown-menu{
-    width: 17em;
-    text-align: center;
-    background: bisque;
-}
-
-.image:hover .image {
-    transform: scale(1.2);
-    margin: 1em 5px;
-}
-.card {
-    background: linear-gradient(60deg, #11808C, #FC0019, #01FF4F, #FF01D7, #5600CC, #00EDF5);
-    margin: 3em 2em;
-}
-
-.card.active {
-    background: linear-gradient(60deg, #6c8988, #8b5e5e, #6b739c, #7d5e85, #738d70);
-}
-
-.button-clicked {
-    background-color: red;
-    color: white;
-}
-.rating{
-    text-align: center;
-    background-color: #141414;
-}
-.toggle {
-    width: 40px;
-    height: 20px;
-    background-color: white;
-    border-radius: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+.navbar{
     position: relative;
-    margin:20px 15px;
-}
-
-.toggle-icon {
-    color: red;
-    margin: 20px 0;
-}
-
-.toggle-ball {
-    width: 18px;
-    height: 18px;
-    background-color: black;
-    position: absolute;
-    right: 1px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: 1s ease all;
-}
-.toggle.active{
-    background-color: black;
-}
-
-.toggle-ball.active{
-    background-color: white;
-    transform: translateX(-20px);
-}
-.search-bar{
     display: flex;
-    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap:10px;
+}
+.nav-lists{
+    display: flex;
     justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+a{
+    text-decoration: none;
+}
+/* a,img{
+    display: block;
+} */
+.nav-link{
+    color: white; 
+}
+.nav-link:is(:hover){
+    color:blanchedalmond;
+}
 
 
-}
-#search-value{
-    margin-top: 50px;
-    width: 200px;
-    height: 50px;
-    background-color: rosybrown;
-}
-#search-criteria{
-    margin-top: 50px;
-    width: 100px;
-    height: 50px;
-    background-color: rosybrown;
-}
-#search-submit{
-    width: 150px;
-    height: 50px;
-    background-color: rosybrown;
-}
